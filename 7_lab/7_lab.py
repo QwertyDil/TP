@@ -1,20 +1,15 @@
-import matplotlib.pyplot 
-import numpy
+import numpy as np
+import matplotlib.pyplot as plt
 
-def f1(x):
-    return ((numpy.abs(x)**(2/3)) + numpy.lib.scimath.sqrt((numpy.abs(x)**4/3) + (1-(x**2)*4)))/2
+# Генерируем массивы точек
+x = np.linspace(-1.5, 1.5, 1000)
+y = np.linspace(-1.5, 1.5, 1000)
+X, Y = np.meshgrid(x, y)
+Z = (X**2 + Y**2 - 1)**3 - X**2 * Y**3
 
-def f2(x):
-    return ((numpy.abs(x)**(2/3)) - numpy.lib.scimath.sqrt((numpy.abs(x)**4/3) + (1-(x**2)*4)))/2
-
-x_positive = numpy.arange(-0.75, 0.75, 0.005)
-
-y_positive_1 = f1(x_positive)
-y_positive_2 = f2(x_positive)
-
-matplotlib.pyplot.xlim(min(x_positive), max(x_positive))
-
-matplotlib.pyplot.plot(x_positive, y_positive_1)
-matplotlib.pyplot.plot(x_positive, y_positive_2)
-
-matplotlib.pyplot.show()
+# Рисуем график
+plt.figure()
+plt.contour(X, Y, Z, [0], colors='r')
+plt.title('График сердца')
+plt.axis('equal')
+plt.show()
